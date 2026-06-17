@@ -10,11 +10,14 @@ import {
   LearningTabs,
   PageLoader,
   ParentLoveSection,
+  ParentReviewVideos,
   SkillsAndJourney,
   StudentStories,
   VisitBanner,
   WhatsAppGalleryMarquee,
 } from "./PremiumEnhancements";
+import { MotionBlock, MotionItem } from "./MotionElements";
+import SchoolName from "./SchoolName";
 
 const navLinks = [
   ["Home", "#home"],
@@ -22,6 +25,7 @@ const navLinks = [
   ["Vision", "#vision"],
   ["Model", "#model"],
   ["Technology", "#technology"],
+  ["Parents", "#parents"],
   ["Admissions", "#admissions"],
   ["Contact", "#contact"],
 ];
@@ -46,7 +50,7 @@ const modelFeatures = [
 ];
 
 const parentReasons = [
-  "Bagless school environment",
+  "Bagless-Paperless school environment",
   "Technology-enabled learning",
   "Individual attention",
   "AI-assisted revision support",
@@ -142,23 +146,23 @@ function LogoMark({ hero = false }) {
 
 function SectionHeader({ eyebrow, title, children }) {
   return (
-    <div className="section-header reveal">
+    <MotionBlock className="section-header reveal" kind="softRise">
       {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
       <h2>{title}</h2>
       {children ? <p>{children}</p> : null}
-    </div>
+    </MotionBlock>
   );
 }
 
 function FeatureCard({ icon, title, children }) {
   return (
-    <article className="feature-card reveal">
+    <MotionItem as="article" className="feature-card reveal" kind="pop">
       <div className="icon-shell">
         <Icon name={icon} />
       </div>
       <h3>{title}</h3>
       <p>{children}</p>
-    </article>
+    </MotionItem>
   );
 }
 
@@ -168,10 +172,24 @@ export default function Home() {
       <link rel="preload" href="/api/drive-video" as="video" type="video/mp4" />
       <PageLoader />
       <FloatingActions />
-      <header className="site-header">
+      <div className="announcement-marquee" aria-label="School announcements">
+        <div className="announcement-track">
+          {[0, 1].map((group) => (
+            <div className="announcement-group" aria-hidden={group === 1} key={group}>
+              <span>Admissions open for 2026</span>
+              <span>Nursery to Class VIII</span>
+              <span>India&apos;s 1st Bagless-Paperless School</span>
+              <span>AI-assisted learning</span>
+              <span>Tablet-enabled classrooms</span>
+              <span>Book a campus visit today</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <MotionBlock as="header" className="site-header" kind="fade" delay={0.08}>
         <a className="brand" href="#home" aria-label="The VegaWorld School home">
           <LogoMark />
-          <span>The VegaWorld School</span>
+          <SchoolName />
         </a>
         <nav className="nav-links" aria-label="Primary navigation">
           {navLinks.map(([label, href]) => (
@@ -183,10 +201,10 @@ export default function Home() {
         <a className="nav-cta" href="#admissions">
           Book a Campus Visit
         </a>
-      </header>
+      </MotionBlock>
 
       <main>
-        <section className="hero section-band -mt-20" id="home">
+        <MotionBlock as="section" className="hero section-band -mt-20" id="home" kind="fade">
           <video
             aria-hidden="true"
             autoPlay
@@ -199,7 +217,7 @@ export default function Home() {
           >
             <source src="/api/drive-video" type="video/mp4" />
           </video>
-          <div className="hero-content reveal">
+          <MotionBlock className="hero-content reveal" kind="left" delay={0.12}>
             <p className="eyebrow">Future-ready schooling in Bhopal</p>
             <h1>Learning Reimagined for the Future</h1>
             <p className="hero-copy">
@@ -219,9 +237,15 @@ export default function Home() {
                 Admissions Open
               </a>
             </div>
-          </div>
+          </MotionBlock>
 
-          <div className="principal-hero-card reveal" aria-label="Principal portrait">
+          <MotionBlock
+            className="principal-hero-card reveal"
+            kind="right"
+            delay={0.22}
+            aria-label="Principal portrait"
+            whileHover={{ y: -8, scale: 1.01 }}
+          >
             <div className="principal-tech-badge">
               <Icon name="brain" />
               <div>
@@ -243,18 +267,21 @@ export default function Home() {
               <p className="eyebrow">Leadership</p>
               <h2>Guided by experienced educational vision.</h2>
             </div>
-          </div>
-        </section>
+          </MotionBlock>
+        </MotionBlock>
 
         <HighlightsCarousel />
         <WhatsAppGalleryMarquee />
         <CountersSection />
+        <ParentReviewVideos />
 
-        <section className="split-section" id="about">
+        
+
+        <MotionBlock as="section" className="split-section" id="about" kind="rise" stagger={0.12}>
           <SectionHeader eyebrow="About" title="A New Vision of Schooling">
-            The VegaWorld School is designed for the future learner.
+            <SchoolName /> is designed for the future learner.
           </SectionHeader>
-          <div className="text-panel reveal">
+          <MotionBlock className="text-panel reveal" kind="right">
             <p>
               We combine strong academic foundations with modern technology and
               innovative pedagogy to create an environment where every child
@@ -265,43 +292,95 @@ export default function Home() {
               homework while enhancing understanding through digital tools,
               teacher mentorship and AI-assisted learning support.
             </p>
+          </MotionBlock>
+        </MotionBlock>
+
+        <MotionBlock as="section" className="vision section-band -mt-40" id="vision" kind="fade">
+          <MotionBlock className="section-header reveal" kind="softRise">
+            <p className="eyebrow">Mission &amp; Vision</p>
+            <h2>Guided by purpose, powered by technology.</h2>
+          </MotionBlock>
+          <div className="vision-grid">
+            <MotionItem as="article" className="vision-card reveal" kind="left">
+              <p className="eyebrow">Vision</p>
+              <h3>Agile, innovative, informed and compassionate learners.</h3>
+              <p>
+                To be an educational institution using advanced technology and
+                pedagogy to cultivate agile, innovative, informed and
+                compassionate learners who contribute to society.
+              </p>
+            </MotionItem>
+            <MotionItem as="article" className="vision-card reveal" kind="right" delay={0.08}>
+              <p className="eyebrow">Mission</p>
+              <h3>A dynamic and inclusive learning environment.</h3>
+              <p>
+                We shall engage all resources to develop a dynamic and
+                inclusive learning environment where technology is used to
+                ignite curiosity, personalise education, inculcate thinking and
+                develop values among students and teachers. We are committed to
+                nurturing well-rounded individuals who are digitally fluent,
+                ethically aware and prepared to make a positive impact on
+                society.
+              </p>
+            </MotionItem>
           </div>
-        </section>
+        </MotionBlock>
+
+        <MotionBlock as="section" className="principal-info section-band -mt-20" kind="fade">
+          <MotionBlock className="principal-info-image reveal" kind="left" whileHover={{ y: -8 }}>
+            <Image
+              src="/images/principal.png"
+              alt="Principal of The VegaWorld School"
+              width={720}
+              height={360}
+              sizes="(max-width: 900px) 100vw, 26vw"
+            />
+          </MotionBlock>
+          <MotionBlock className="principal-info-copy reveal" kind="right" delay={0.08}>
+            <p className="eyebrow">Principal&apos;s Message</p>
+            <h2>Leading with care, clarity and future-ready vision.</h2>
+            <p>
+              At <SchoolName />, leadership is rooted in a simple belief:
+              every child deserves a learning environment that feels joyful,
+              thoughtful and deeply personal.
+            </p>
+            <p>
+              Our principal guides the school&apos;s Bagless-Paperless model
+              with a balance of strong academic foundations, compassionate
+              mentorship and meaningful use of technology. The focus is on
+              nurturing confident learners who think independently, communicate
+              clearly and grow with values.
+            </p>
+            <div className="principal-info-points">
+              <span>Student-first learning</span>
+              <span>Technology with purpose</span>
+              <span>Values-led education</span>
+            </div>
+          </MotionBlock>
+        </MotionBlock>
 
         <VisitBanner compact />
 
-        <section className="vision section-band" id="vision">
-          <div className="vision-card reveal">
-            <p className="eyebrow">Our Vision</p>
-            <h2>Agile, innovative, informed and compassionate learners.</h2>
-            <p>
-              To be an educational institution using advanced technology and
-              progressive pedagogy to cultivate learners who contribute
-              positively to society.
-            </p>
-          </div>
-        </section>
-
         <LearningTabs />
 
-        <section className="content-section" id="model">
+        <MotionBlock as="section" className="content-section" id="model" kind="rise">
           <SectionHeader
             eyebrow="Unique Model"
-            title="India's 1st Bagless & Paperless Learning Environment"
+            title="India's 1st Bagless-Paperless & Paperless Learning Environment"
           />
           <div className="feature-grid compact">
             {modelFeatures.map((feature, index) => (
-              <article className="mini-card reveal" key={feature}>
+              <MotionItem as="article" className="mini-card reveal" delay={index * 0.04} key={feature}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <p>{feature}</p>
-              </article>
+              </MotionItem>
             ))}
           </div>
-        </section>
+        </MotionBlock>
 
         <ComparisonSection />
 
-        <section className="content-section section-band" id="technology">
+        <MotionBlock as="section" className="content-section section-band" id="technology" kind="fade">
           <SectionHeader eyebrow="Technology" title="Technology Enabled Classrooms">
             Technology is used thoughtfully, ensuring low screen time but high
             learning impact.
@@ -317,11 +396,11 @@ export default function Home() {
               self-paced support keep learning personal.
             </FeatureCard>
           </div>
-        </section>
+        </MotionBlock>
 
         <GalleryAndAiShowcase />
 
-        <section className="content-section">
+        <MotionBlock as="section" className="content-section" kind="rise">
           <SectionHeader title="Every Child Learns Differently">
             Our pedagogy focuses on individual learning pathways rather than
             one-size-fits-all instruction. Peer-to-peer learning among students
@@ -341,15 +420,15 @@ export default function Home() {
               </FeatureCard>
             ))}
           </div>
-        </section>
+        </MotionBlock>
 
         <VisitBanner compact />
 
-        <section className="split-section section-band">
+        <MotionBlock as="section" className="split-section section-band" kind="fade">
           <SectionHeader title="Learning Should Not Become a Burden">
             We call homework &quot;Self Learning Mode.&quot;
           </SectionHeader>
-          <div className="check-panel reveal">
+          <MotionBlock className="check-panel reveal" kind="right">
             {[
               "Minimum homework policy",
               "Concept reinforcement",
@@ -362,11 +441,11 @@ export default function Home() {
                 {item}
               </p>
             ))}
-          </div>
-        </section>
+          </MotionBlock>
+        </MotionBlock>
 
-        <section className="master-class">
-          <div className="master-copy reveal">
+        <MotionBlock as="section" className="master-class" kind="fade">
+          <MotionBlock className="master-copy reveal" kind="left">
             <p className="eyebrow">Vega Master Class IX-XII</p>
             <h2>Professional academic preparation for competitive careers.</h2>
             <p>
@@ -374,8 +453,8 @@ export default function Home() {
               full-day professional academic program designed for students
               aiming for NEET and JEE.
             </p>
-          </div>
-          <div className="exam-card reveal">
+          </MotionBlock>
+          <MotionBlock className="exam-card reveal" kind="right" whileHover={{ y: -8, scale: 1.01 }}>
             <div className="exam-row">
               <span>NEET</span>
               <span>JEE</span>
@@ -392,42 +471,42 @@ export default function Home() {
                 {item}
               </p>
             ))}
-          </div>
-        </section>
+          </MotionBlock>
+        </MotionBlock>
 
         <SkillsAndJourney />
 
-        <section className="content-section">
+        <MotionBlock as="section" className="content-section" kind="rise">
           <SectionHeader title="Why Parents Choose VegaWorld" />
           <div className="reason-grid">
             {parentReasons.map((reason) => (
-              <div className="reason-item reveal" key={reason}>
+              <MotionItem className="reason-item reveal" delay={parentReasons.indexOf(reason) * 0.04} key={reason}>
                 <Icon name="check" />
                 <span>{reason}</span>
-              </div>
+              </MotionItem>
             ))}
           </div>
-        </section>
+        </MotionBlock>
 
         <ParentLoveSection />
 
-        <section className="content-section section-band">
+        <MotionBlock as="section" className="content-section section-band" kind="fade">
           <SectionHeader title="A Campus Designed for Curiosity, Creativity and Collaboration" />
           <div className="campus-grid">
             {campusFeatures.map((feature) => (
-              <article className="campus-item reveal" key={feature}>
+              <MotionItem as="article" className="campus-item reveal" delay={campusFeatures.indexOf(feature) * 0.05} key={feature}>
                 <Icon name="spark" />
                 <h3>{feature}</h3>
-              </article>
+              </MotionItem>
             ))}
           </div>
-        </section>
+        </MotionBlock>
 
         <VisitBanner />
         <StudentStories />
 
-        <section className="admissions" id="admissions">
-          <div className="admissions-copy reveal">
+        <MotionBlock as="section" className="admissions" id="admissions" kind="fade">
+          <MotionBlock className="admissions-copy reveal" kind="left">
             <p className="eyebrow">Admissions Open</p>
             <h2>Admissions are open for the academic session.</h2>
             <p>
@@ -445,9 +524,9 @@ export default function Home() {
                 )
               )}
             </div>
-          </div>
+          </MotionBlock>
 
-          <form className="enquiry-form reveal">
+          <MotionBlock as="form" className="enquiry-form reveal" kind="right">
             <h3>Online Enquiry Form</h3>
             <label>
               Parent Name
@@ -474,18 +553,20 @@ export default function Home() {
               <textarea name="message" rows="4" placeholder="Tell us how we can help" />
             </label>
             <button type="submit">Submit Enquiry</button>
-          </form>
-        </section>
+          </MotionBlock>
+        </MotionBlock>
 
         <EngagementSection />
 
-        <section className="contact section-band" id="contact">
-          <div className="contact-card reveal">
-            <p className="eyebrow">Contact The VegaWorld School</p>
+        <MotionBlock as="section" className="contact section-band" id="contact" kind="fade">
+          <MotionBlock className="contact-card reveal" kind="left">
+            <p className="eyebrow">
+              Contact <SchoolName />
+            </p>
             <h2 >Book a campus visit to experience the future of schooling.</h2>
             <br/>
             <address>
-              The VegaWorld School,<br />
+              <SchoolName />,<br />
               Whitehall Avenue,<br />
               Near Lake Pearl Spring Society,<br />
               Abbas Nagar Main Road, Off Airport Road,<br />
@@ -500,13 +581,13 @@ export default function Home() {
                 farrukh.yusufzai@gmail.com
               </a>
             </p>
-          </div>
-          <div className="map-placeholder reveal" aria-label="Google Map placeholder">
+          </MotionBlock>
+          <MotionBlock className="map-placeholder reveal" kind="right" aria-label="Google Map placeholder">
             <Icon name="map" />
             <span>Google Map Placeholder</span>
             <p>Whitehall Avenue, Abbas Nagar Main Road, Bhopal</p>
-          </div>
-        </section>
+          </MotionBlock>
+        </MotionBlock>
 
         <FinalAdmissionCta />
       </main>
@@ -514,7 +595,7 @@ export default function Home() {
       <footer className="site-footer">
         <div className="footer-brand">
           <LogoMark />
-          <span>The VegaWorld School</span>
+          <SchoolName />
         </div>
         <div className="footer-links">
           {navLinks.slice(1).map(([label, href]) => (
@@ -524,7 +605,9 @@ export default function Home() {
           ))}
         </div>
         <p>88177 81608 | 92252 34034 | farrukh.yusufzai@gmail.com</p>
-        <p>Copyright 2026 The VegaWorld School. All rights reserved.</p>
+        <p>
+          Copyright 2026 <SchoolName />. All rights reserved.
+        </p>
       </footer>
     </>
   );
