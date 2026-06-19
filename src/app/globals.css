@@ -1114,7 +1114,7 @@ h3 {
   display: grid;
   gap: 22px;
   padding: 42px clamp(20px, 5vw, 72px);
-  background: #11100b;
+  background: #654B44;
   color: rgba(255, 255, 255, 0.74);
 }
 

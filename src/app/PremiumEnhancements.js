@@ -35,7 +35,7 @@ const faqs = [
   [`Is ${<div className = ""><SchoolName /></div>} Bagless-Paperless?", "Yes. The model is designed to reduce heavy bags and daily notebook carrying while keeping learning structured at school and home.`],
   ["How is technology used in classrooms?", "Technology supports lessons, assignments, feedback and revision. It is used thoughtfully for high learning impact with controlled screen time."],
   ["Which classes are admissions open for?", "Admissions are open from Nursery to Class VIII with MP Board affiliation."],
-  ["What is Self Learning Mode?", "Self Learning Mode is VegaWorld's lighter, smarter homework philosophy focused on reinforcement, projects and independent thinking."],
+  ["What is Self Learning Mode?", "Self Learning Mode is <SchoolName />'s lighter, smarter homework philosophy focused on reinforcement, projects and independent thinking."],
   ["Does the school support NEET and JEE preparation?", "Yes. Vega Master Class IX-XII is designed as a full-day academic pathway for senior students targeting NEET and JEE."],
 ];
 
@@ -150,7 +150,7 @@ export function PageLoader() {
   }
 
   return (
-    <div className={leaving ? "page-loader leaving" : "page-loader"} role="status" aria-label="Loading The VegaWorld School">
+    <div className={leaving ? "page-loader leaving" : "page-loader"} role="status" aria-label="Loading The <SchoolName /> School">
       <div className="loader-mark">
         <Image src="/images/logo.png" alt="" width={92} height={92} priority />
       </div>
@@ -230,7 +230,7 @@ export function WhatsAppGalleryMarquee() {
             <figure className="whatsapp-photo-card" key={`${image}-${index}`}>
               <Image
                 src={`/images/${image}`}
-                alt="The VegaWorld School campus moment"
+                alt="The <SchoolName /> School campus moment"
                 width={420}
                 height={747}
                 sizes="(max-width: 760px) 72vw, 320px"
@@ -250,7 +250,7 @@ export function LearningTabs() {
     <MotionBlock as="section" className="premium-section -mt-20 tab-section" kind="rise">
       <MotionBlock className="section-header reveal" kind="softRise">
         <p className="eyebrow">Interactive Model</p>
-        <h2>Explore how The VegaWorld learning works.</h2>
+        <h2>Explore how The <SchoolName /> learning works.</h2>
       </MotionBlock>
       <MotionBlock className="tabs-shell reveal" kind="scale">
         <div className="tabs-list" role="tablist" aria-label="Learning model tabs">
@@ -288,7 +288,7 @@ export function ParentLoveSection() {
     <MotionBlock as="section" className="premium-section -mt-30" kind="rise">
       <MotionBlock className="section-header reveal" kind="softRise">
         <p className="eyebrow">Parent Trust</p>
-        <h2>Why Modern Parents Love VegaWorld</h2>
+        <h2>Why Modern Parents Love <SchoolName /></h2>
       </MotionBlock>
       <div className="premium-card-grid">
         {cards.map(([title, copy], index) => (

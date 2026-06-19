@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import {
   ComparisonSection,
@@ -167,6 +169,37 @@ function FeatureCard({ icon, title, children }) {
 }
 
 export default function Home() {
+  const handleEnquirySubmit = (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+
+  const parentName = formData.get("parentName");
+  const studentName = formData.get("studentName");
+  const classApplyingFor = formData.get("classApplyingFor");
+  const phone = formData.get("phone");
+  const email = formData.get("email");
+  const message = formData.get("message");
+
+  const whatsappMessage = `
+*New Admission Enquiry*
+
+Parent Name: ${parentName}
+Student Name: ${studentName}
+Class Applying For: ${classApplyingFor}
+Phone: ${phone}
+Email: ${email}
+
+Message:
+${message}
+  `;
+
+  const whatsappUrl = `https://wa.me/917987999491?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
+
+  window.open(whatsappUrl, "_blank");
+};
   return (
     <>
       <link rel="preload" href="/api/drive-video" as="video" type="video/mp4" />
@@ -187,7 +220,7 @@ export default function Home() {
         </div>
       </div>
       <MotionBlock as="header" className="site-header" kind="fade" delay={0.08}>
-        <a className="brand" href="#home" aria-label="The VegaWorld School home">
+        <a className="brand" href="#home" aria-label="The <SchoolName /> School home">
           <LogoMark />
           <SchoolName />
         </a>
@@ -256,7 +289,7 @@ export default function Home() {
             <div className="principal-avatar">
               <Image
                 src="/images/principal.png"
-                alt="Principal of The VegaWorld School"
+                alt="Principal of The <SchoolName /> School"
                 width={260}
                 height={260}
                 priority
@@ -328,33 +361,42 @@ export default function Home() {
 
         <MotionBlock as="section" className="principal-info section-band -mt-20" kind="fade">
           <MotionBlock className="principal-info-image reveal" kind="left" whileHover={{ y: -8 }}>
-            <Image
-              src="/images/principal.png"
-              alt="Principal of The VegaWorld School"
+            {/* <Image
+              src="#"
+              alt="Principal of The <SchoolName /> School"
               width={720}
               height={360}
               sizes="(max-width: 900px) 100vw, 26vw"
-            />
+            /> */}
           </MotionBlock>
           <MotionBlock className="principal-info-copy reveal" kind="right" delay={0.08}>
             <p className="eyebrow">Principal&apos;s Message</p>
-            <h2>Leading with care, clarity and future-ready vision.</h2>
+            <h2>Dear Parents and Learners.</h2>
             <p>
-              At <SchoolName />, leadership is rooted in a simple belief:
-              every child deserves a learning environment that feels joyful,
-              thoughtful and deeply personal.
+             
+              Welcome to <SchoolName /> {" "}a place where the future of education is already a reality.
+Guided by the vision of NEP 2020, we have created one of India&apos;s most innovative learning environment: bagless, paperless, technology-enabled and centered around every child&apos;s unique potential.
             </p>
             <p>
-              Our principal guides the school&apos;s Bagless-Paperless model
-              with a balance of strong academic foundations, compassionate
-              mentorship and meaningful use of technology. The focus is on
-              nurturing confident learners who think independently, communicate
-              clearly and grow with values.
+             We believe, that learning should be personalized, engaging and meaningful. Our students follow individual learning pathways that nurture their strengths, interests and pace of growth. Alongside teacher-led instruction, peer-to-peer learning encourages collaboration, communication, leadership and critical thinking skills essential for success in the modern world.
+At <SchoolName />, education extends beyond textbooks. Through experiential learning, projects and real-world applications, students learn to think independently, solve problems creatively and become confident lifelong learners.
+As pioneers of this transformative model, we are proud to be setting new standards in school education. While many institutions may adopt similar approaches in the future, our students have the privilege of experiencing tomorrow&apos;s classroom, today.
             </p>
-            <div className="principal-info-points">
-              <span>Student-first learning</span>
-              <span>Technology with purpose</span>
-              <span>Values-led education</span>
+            <p>
+              I invite you to partner with us in shaping young minds that are curious, compassionate and future-ready. Together, let us empower every child to dream boldly, learn joyfully and lead confidently.
+            
+            </p>
+            <p>
+           
+The future begins here.
+
+            </p>
+            <div className="principal-info-points flex flex-col items-end justify-end w-full text-center">
+              <span>Warm Regards</span>
+              <span>Principal : Mrs Maria</span>
+            </div>
+            <div className = "w-full mt-4 flex items-end justify-end">
+              <SchoolName />
             </div>
           </MotionBlock>
         </MotionBlock>
@@ -449,7 +491,7 @@ export default function Home() {
             <p className="eyebrow">Vega Master Class IX-XII</p>
             <h2>Professional academic preparation for competitive careers.</h2>
             <p>
-              For senior students, VegaWorld offers Vega Master Class, a
+              For senior students, <SchoolName /> offers Vega Master Class, a
               full-day professional academic program designed for students
               aiming for NEET and JEE.
             </p>
@@ -476,8 +518,8 @@ export default function Home() {
 
         <SkillsAndJourney />
 
-        <MotionBlock as="section" className="content-section" kind="rise">
-          <SectionHeader title="Why Parents Choose VegaWorld" />
+        <MotionBlock as="section" className="content-section -mt-20" kind="rise">
+          <SectionHeader title={<>Why Parents Choose <SchoolName /></>} />
           <div className="reason-grid">
             {parentReasons.map((reason) => (
               <MotionItem className="reason-item reveal" delay={parentReasons.indexOf(reason) * 0.04} key={reason}>
@@ -526,34 +568,74 @@ export default function Home() {
             </div>
           </MotionBlock>
 
-          <MotionBlock as="form" className="enquiry-form reveal" kind="right">
-            <h3>Online Enquiry Form</h3>
-            <label>
-              Parent Name
-              <input name="parentName" type="text" placeholder="Enter parent name" />
-            </label>
-            <label>
-              Student Name
-              <input name="studentName" type="text" placeholder="Enter student name" />
-            </label>
-            <label>
-              Class Applying For
-              <input name="classApplyingFor" type="text" placeholder="Nursery to Class VIII" />
-            </label>
-            <label>
-              Phone Number
-              <input name="phone" type="tel" placeholder="Enter phone number" />
-            </label>
-            <label>
-              Email
-              <input name="email" type="email" placeholder="Enter email address" />
-            </label>
-            <label className="full">
-              Message
-              <textarea name="message" rows="4" placeholder="Tell us how we can help" />
-            </label>
-            <button type="submit">Submit Enquiry</button>
-          </MotionBlock>
+         <MotionBlock
+  as="form"
+  className="enquiry-form reveal"
+  kind="right"
+  onSubmit={handleEnquirySubmit}
+>
+  <h3>Online Enquiry Form</h3>
+
+  <label>
+    Parent Name
+    <input
+      name="parentName"
+      type="text"
+      placeholder="Enter parent name"
+      required
+    />
+  </label>
+
+  <label>
+    Student Name
+    <input
+      name="studentName"
+      type="text"
+      placeholder="Enter student name"
+      required
+    />
+  </label>
+
+  <label>
+    Class Applying For
+    <input
+      name="classApplyingFor"
+      type="text"
+      placeholder="Nursery to Class VIII"
+      required
+    />
+  </label>
+
+  <label>
+    Phone Number
+    <input
+      name="phone"
+      type="tel"
+      placeholder="Enter phone number"
+      required
+    />
+  </label>
+
+  <label>
+    Email
+    <input
+      name="email"
+      type="email"
+      placeholder="Enter email address"
+    />
+  </label>
+
+  <label className="full">
+    Message
+    <textarea
+      name="message"
+      rows="4"
+      placeholder="Tell us how we can help"
+    />
+  </label>
+
+  <button type="submit">Submit Enquiry</button>
+</MotionBlock>
         </MotionBlock>
 
         <EngagementSection />
@@ -582,11 +664,23 @@ export default function Home() {
               </a>
             </p>
           </MotionBlock>
-          <MotionBlock className="map-placeholder reveal" kind="right" aria-label="Google Map placeholder">
-            <Icon name="map" />
-            <span>Google Map Placeholder</span>
-            <p>Whitehall Avenue, Abbas Nagar Main Road, Bhopal</p>
-          </MotionBlock>
+          <MotionBlock
+  className="map-placeholder reveal"
+  kind="right"
+  aria-label="Google Map of Lake Pearl Spring Colony, Bhopal"
+>
+  <iframe
+    src="https://www.google.com/maps?q=Lake+Pearl+Spring+Colony,+Abbas+Nagar+Road,+Near+Woodz+Inn+Airport,+Gandhi+Nagar,+Bhopal,+Madhya+Pradesh+462036&output=embed"
+    title="Google Map of Lake Pearl Spring Colony, Bhopal"
+    width="100%"
+    height="800"
+    style={{ border: 0 }}
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+    className = "rounded-lg"
+  />
+</MotionBlock>
         </MotionBlock>
 
         <FinalAdmissionCta />
