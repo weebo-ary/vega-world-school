@@ -20,6 +20,7 @@ import {
 } from "./PremiumEnhancements";
 import { MotionBlock, MotionItem } from "./MotionElements";
 import SchoolName from "./SchoolName";
+import { BiCopyright } from "react-icons/bi";
 
 const navLinks = [
   ["Home", "#home"],
@@ -700,7 +701,7 @@ The future begins here.
         </div>
         <p>88177 81608 | 92252 34034 | farrukh.yusufzai@gmail.com</p>
         <p>
-          Copyright 2026 <SchoolName />. All rights reserved.
+         Designed & Developed by <a href = "https://thesocialaddict.com" target="_blank" className = "font-bold">TheSocialAddict</a> © 2026 <SchoolName /> All rights reserved.
         </p>
       </footer>
     </>
